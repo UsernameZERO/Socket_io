@@ -2,6 +2,7 @@ body{
     margin: 0;
     color: rgba(69, 69, 247, 0.955);
     background-color: black;
+    height: 100vh;
 }
 .headline{
     border-bottom: 2px solid;
@@ -15,8 +16,9 @@ body{
 .container{
     max-width: 50rem;
     background-color: rgb(95, 64, 123);
-    height: 70vh;
+    height: 60vh;
     margin: auto;
+    overflow-y: scroll ;
 }
 .message{
     border: 2px solid red;
@@ -34,4 +36,25 @@ body{
 .Right{
     float: right;
     clear: both;
+}
+
+#send-container{
+    display: block;
+    text-align: center;
+    margin: auto;
+    max-width: 85rem;
+    width: 100%;
+    padding: 4px;
+}
+#messageInp{
+    width: 54%;
+    border: 2px solid gold;
+    border-radius: 5px;
+    padding: 6px;
+}
+.btn{
+    padding: 7px;
+    border-radius: 11px;
+    border: 2px solid green;
+    cursor: pointer;
 }
