@@ -1,0 +1,37 @@
+body{
+    margin: 0;
+    color: rgba(69, 69, 247, 0.955);
+    background-color: black;
+}
+.headline{
+    border-bottom: 2px solid;
+    color: rgb(235, 228, 240);
+   
+}
+#head{
+    padding-left: 2rem;
+    color: blueviolet;
+}
+.container{
+    max-width: 50rem;
+    background-color: rgb(95, 64, 123);
+    height: 70vh;
+    margin: auto;
+}
+.message{
+    border: 2px solid red;
+    max-width: 25%;
+    width: fit-content;
+    padding: 5px;
+    margin: 14px;
+    background: aqua;
+    border-radius: 11px;
+}
+.Left{
+    float: left;
+    clear: both;
+}
+.Right{
+    float: right;
+    clear: both;
+}
