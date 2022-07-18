@@ -1,5 +1,7 @@
 const chatForm = document.getElementById('chat-form');
 const chatContainer = document.querySelector('.chat-messages');
+const roomName = document.getElementById('room-name');
+const usersList = document.getElementById('users');
 
 //Get username and room from url
 const {
@@ -78,4 +80,26 @@ const append = (message, postion) => {
 //output msg from dom
 function outputMessage(msg, position) {
     append(msg, position);
+}
+
+//List of users
+socket.on('roomUsers', ({
+    room,
+    users
+}) => {
+    outputRoomName(room);
+    outputUsers(users);
+});
+
+//add room in dom
+function outputRoomName(room) {
+    roomName.innerText = room;
+}
+
+//Add users to DOM
+
+function outputUsers(users) {
+    usersList.innerHTML = `
+   ${users.map(user => `<li>${user.username}</li>`).join('')}
+   `;
 }

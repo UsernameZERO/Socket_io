@@ -194,7 +194,7 @@ a {
     max-width: 25%;
     width: fit-content;
     /* padding: 5px; */
-    /* margin: 14px; */
+    margin: 6px;
     /* background: aqua;
     border-radius: 11px; */
 }
@@ -212,4 +212,7 @@ a {
 }
 span.usrr{
 	color: blueviolet;
+}
+.show-msg{
+	background: burlywood;
 }

@@ -4,6 +4,12 @@ const express = require("express");
 const socketio = require("socket.io");
 const app = express();
 const formatMessage = require('./utils/messages');
+const {
+    userJoin,
+    getCurrentUser,
+    userLeaves,
+    getRoomUsers
+} = require('./utils/users');
 
 app.set('port', process.env.PORT || 3000);
 var server = http.createServer(app).listen(app.get('port'), function () {
@@ -25,22 +31,43 @@ io.on("connection", (socket) => {
         username,
         room
     }) => {
+
+        const user = userJoin(socket.id, username, room);
+
+        socket.join(user.room);
+
         let msg = 'Welcome you to the chat!!';
         socket.emit('messageR', formatMessage(botName, msg));
 
-        socket.broadcast.emit('messageL', formatMessage(botName, `${socket.id} has joined chat`));
-    })
+        socket.broadcast.to(user.room).emit('messageL', formatMessage(botName, `${username} has joined chat`));
+        //send users and room info
+        io.to(user.room).emit('roomUsers', {
+            room: user.room,
+            users: getRoomUsers(user.room)
+        });
+    });
 
     // console.log(socket.id);
 
 
     socket.on('chatMsg', (msg) => {
-        const useree = socket.id;
-        socket.broadcast.emit('messageL', formatMessage(useree, msg));
+        const user = getCurrentUser(socket.id);
+        socket.broadcast.to(user.room).emit('messageL', formatMessage(user.username, msg));
     })
     socket.on('disconnect', () => {
-        let msg = `A ${socket.id} has left the chat`;
-        // let postion = 'Left'
-        io.emit('messageL', formatMessage(botName, msg));
-    })
-})
+        const user = userLeaves(socket.id);
+        if (user) {
+            let msg = `${user.username} has left the chat`;
+            io.to(user.room).emit('messageL', formatMessage(botName, msg));
+            //send users and room info
+            io.to(user.room).emit('roomUsers', {
+                room: user.room,
+                users: getRoomUsers(user.room)
+            });
+        }
+
+
+    });
+
+
+});
