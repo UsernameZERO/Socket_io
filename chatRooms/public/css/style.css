@@ -188,3 +188,28 @@ a {
 		display: none;
 	}
 }
+
+.messages{
+    /* border: 2px solid red; */
+    max-width: 25%;
+    width: fit-content;
+    /* padding: 5px; */
+    /* margin: 14px; */
+    /* background: aqua;
+    border-radius: 11px; */
+}
+.Left{
+    float: left;
+    clear: both;
+}
+.Right{
+    float: right;
+    clear: both;
+}
+.usrr {
+	font-size: 11px;
+	background: aquamarine;
+}
+span.usrr{
+	color: blueviolet;
+}
